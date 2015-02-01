@@ -1,0 +1,45 @@
+name = idfive
+description = idfive standard setup
+version = VERSION
+core = 7.x
+
+;core
+
+dependencies[] = block
+dependencies[] = color
+dependencies[] = comment
+dependencies[] = contextual
+dependencies[] = dashboard
+dependencies[] = help
+dependencies[] = image
+dependencies[] = list
+dependencies[] = menu
+dependencies[] = number
+dependencies[] = options
+dependencies[] = path
+dependencies[] = taxonomy
+dependencies[] = dblog
+dependencies[] = search
+dependencies[] = shortcut
+dependencies[] = toolbar
+dependencies[] = field_ui
+dependencies[] = file
+dependencies[] = rdf
+
+;contrib
+
+dependencies[] = views
+dependencies[] = ctools
+dependencies[] = devel
+dependencies[] = field_collection
+dependencies[] = find_content
+dependencies[] = metatag
+dependencies[] = pathauto
+dependencies[] = redirect
+dependencies[] = references
+dependencies[] = link
+dependencies[] = date
+dependencies[] = entity
+dependencies[] = entityreference
+
+files[] = idfive.profile
