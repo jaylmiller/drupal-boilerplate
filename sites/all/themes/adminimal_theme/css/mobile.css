@@ -45,6 +45,10 @@ ul.primary li {
   width: 100%;
 }
 
+body.adminimal-theme #navigation ul.primary li:first-of-type {
+  margin-left: 0;
+}
+
 body.adminimal-theme ul.primary li a:active, body.adminimal-theme ul.primary li a:link, body.adminimal-theme ul.primary li a:visited {
   border: 0 none;
   display: block;

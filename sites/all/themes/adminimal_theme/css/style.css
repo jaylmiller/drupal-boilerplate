@@ -364,7 +364,7 @@ ul.primary li.active a,ul.primary li.active a.active,ul.primary li.active a:acti
   border-top: 3px solid #0074BD;
   margin-top: -3px;
   color: #333;
-  box-shadow: 0px 0px 8px rgba(0,0,0,0.2);
+  box-shadow: 0px 0px 3px rgba(0,0,0,0.2);
   position: relative;
 }
 
