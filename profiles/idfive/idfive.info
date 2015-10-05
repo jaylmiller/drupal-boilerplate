@@ -41,5 +41,11 @@ dependencies[] = link
 dependencies[] = date
 dependencies[] = entity
 dependencies[] = entityreference
+dependencies[] = admin_menu
+dependencies[] = adminimal_admin_menu
+dependencies[] = wysiwyg
+dependencies[] = wysiwyg_filter
+dependencies[] = media
+dependencies[] = media_youtube
 
 files[] = idfive.profile
