@@ -212,6 +212,15 @@ function idfive_install() {
       'modified' => 1,
       'locked' => 0,
     ),
+    array(
+      'type' => 'homepage',
+      'name' => st('Homepage'),
+      'base' => 'node_content',
+      'description' => st("Create a specific homepage. There should only be <em>one</em>."),
+      'custom' => 1,
+      'modified' => 1,
+      'locked' => 0,
+    ),
   );
 
   foreach ($types as $type) {
@@ -291,4 +300,12 @@ function idfive_install() {
     ->execute();
   variable_set('admin_theme', 'adminimal');
   variable_set('node_admin_theme', '1');
+  variable_set('adminimal_theme_skin', 'material');
+  
+  db_insert('wysiwyg')->fields(array(
+    'format' => 'filtered_html',
+    'editor' => 'ckeditor',
+    'settings' => serialize($filtered_html_wysiwyg)    
+  ))
+  ->execute();
 }

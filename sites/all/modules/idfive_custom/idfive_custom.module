@@ -1,0 +1,15 @@
+<?php 
+
+/**
+ * @file
+ * Provide structure for the administrative interface to Views.
+ */
+
+
+function idfive_custom_wysiwyg_include_directory($type) 
+{
+  switch($type) {
+    case 'plugins':
+      return $type;
+  }
+}

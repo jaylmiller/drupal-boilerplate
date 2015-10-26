@@ -1,0 +1,7 @@
+name = idfive
+description = idfive module
+core = 7.x
+
+dependencies[] = wysiwyg
+
+files[] = idfive_custom.module
