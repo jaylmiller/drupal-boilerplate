@@ -302,6 +302,15 @@ function idfive_install() {
   variable_set('node_admin_theme', '1');
   variable_set('adminimal_theme_skin', 'material');
   
+  
+  //Enable Silk and set to default theme
+  db_update('system')
+    ->fields(array('status' => 1))
+    ->condition('type', 'theme')
+    ->condition('name', 'silk')
+    ->execute();
+  variable_set('theme_default', 'silk');
+  
   db_insert('wysiwyg')->fields(array(
     'format' => 'filtered_html',
     'editor' => 'ckeditor',
