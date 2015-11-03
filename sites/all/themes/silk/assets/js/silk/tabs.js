@@ -115,12 +115,16 @@
         var id = settings.prefix + '-' + a.toString() + '-' + b.toString();
 
         // Get first header element (h1, h2...)
-        var $heading = $(this).find('> header :header').first();
+        var $heading = $(this).find('> header').first();
+        
+        //console.log($(this).find('> header').first().siblings());
 
         // Add class to content and header
         $(this)
-          .find('> div').first().addClass(settings.contentClass).end().end()
+          .find('> header').first().siblings(':not(.silk-tabs__tab)').wrapAll('<div class="' + settings.contentClass + '"></div>').end().end()
           .find('> header').first().addClass(settings.headerClass);
+        
+        //$(settings.contentClass).remove(':empty');
 
         // Push nav element
         nav.push({
