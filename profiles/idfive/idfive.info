@@ -25,6 +25,11 @@ dependencies[] = field
 dependencies[] = field_ui
 dependencies[] = file
 dependencies[] = rdf
+dependencies[] = date
+dependencies[] = date_api
+dependencies[] = date_context
+dependencies[] = date_views
+
 
 ;contrib
 
@@ -62,7 +67,7 @@ dependencies[] = jquery_update
 dependencies[] = rules
 dependencies[] = features
 dependencies[] = file_entity
-dependencies[] = idfive_custom
+dependencies[] = silky
 
 
 files[] = idfive.profile

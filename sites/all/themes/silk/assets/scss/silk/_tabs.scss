@@ -1,0 +1,57 @@
+// ========================================
+// Silk Tabs
+// ========================================
+
+.silk-tabs {}
+
+  .silk-tabs__nav {
+    display: none;
+
+    @include media($silk-tabs-to-accordion) {
+      display: block;
+    }
+
+    li {
+      display: inline-block;
+      vertical-align: top;
+    }
+
+      a {
+        @include h4;
+        display: block;
+        text-decoration: none;
+        color: inherit;
+      }
+
+  }
+
+  .silk-tabs__header {
+
+    @include media($silk-tabs-to-accordion) {
+      display: none;
+    }
+
+    a {
+      @extend %silk-toggle;
+    }
+
+  }
+
+  .silk-tabs__content {
+    opacity: 1;
+    transition: opacity .3s;
+
+    &.is-hidden {
+      opacity: 0;
+    }
+
+    &.is-hidden-accordion {
+      display: none;
+
+      @include media($silk-tabs-to-accordion) {
+        display: inherit;
+      }
+
+    }
+
+  }

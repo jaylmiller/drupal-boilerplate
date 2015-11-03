@@ -1,0 +1,120 @@
+<?php
+/**
+ * give it the business
+ */
+function silky_tools_plugin() {
+	return array(
+
+			'two_columns' => array(
+				'path' => drupal_get_path('module', 'silky') . '/plugins',
+				'js file' => 'two_columns.js',
+				'js path' => drupal_get_path('module', 'silky') . '/plugins',
+				'css path' => drupal_get_path('module', 'silky') . '/plugins',
+				'css file' => 'snippet.css',
+				'icon title' => 'Two Column Layout',
+	      'icon path' => drupal_get_path('module', 'silky') . '/plugins/icons',
+	      'icon file' => 'twoColumn.png',
+				'buttons' => array('two_columns' => t('two_columns')),
+				'load' => TRUE,
+				'internal' => FALSE,
+				'settings' => array(),
+		  ),
+        
+      'accordion_wrapper' => array(
+        'title' => t('Accordion Wrapper'),
+				'path' => drupal_get_path('module', 'silky') . '/plugins',
+				'js file' => 'accordion_wrapper.js',
+				'js path' => drupal_get_path('module', 'silky') . '/plugins',
+				'css path' => drupal_get_path('module', 'silky') . '/plugins',
+				'css file' => 'snippet.css',
+				'icon title' => 'accordion_wrapper',
+	      'icon path' => drupal_get_path('module', 'silky') . '/plugins/icons',
+	      'icon file' => 'accordion.png',
+				'buttons' => array('accordion_wrapper' => t('accordion_wrapper')),
+				'load' => TRUE,
+				'internal' => FALSE,
+				'settings' => array(),
+		  ),
+
+      'accordion_header' => array(
+        'title' => t('Accordion Header'),
+				'path' => drupal_get_path('module', 'silky') . '/plugins',
+				'js file' => 'accordion_header.js',
+				'js path' => drupal_get_path('module', 'silky') . '/plugins',
+				'css path' => drupal_get_path('module', 'silky') . '/plugins',
+				'css file' => 'snippet.css',
+				'icon title' => 'accordion_header',
+	      'icon path' => drupal_get_path('module', 'silky') . '/plugins/icons',
+	      'icon file' => 'accordion.png',
+				'buttons' => array('accordion_header' => t('accordion_header')),
+				'load' => TRUE,
+				'internal' => FALSE,
+				'settings' => array(),
+		  ),
+    
+      'accordion_content' => array(
+        'title' => t('Accordion Content'),
+				'path' => drupal_get_path('module', 'silky') . '/plugins',
+				'js file' => 'accordion_content.js',
+				'js path' => drupal_get_path('module', 'silky') . '/plugins',
+				'css path' => drupal_get_path('module', 'silky') . '/plugins',
+				'css file' => 'snippet.css',
+				'icon title' => 'accordion_content',
+	      'icon path' => drupal_get_path('module', 'silky') . '/plugins/icons',
+	      'icon file' => 'accordion.png',
+				'buttons' => array('accordion_content' => t('accordion_content')),
+				'load' => TRUE,
+				'internal' => FALSE,
+				'settings' => array(),
+		  ),
+    
+      'tabs_wrapper' => array(
+        'title' => t('Tabs Outer Wrapper'),
+				'path' => drupal_get_path('module', 'silky') . '/plugins',
+				'js file' => 'tabs_wrapper.js',
+				'js path' => drupal_get_path('module', 'silky') . '/plugins',
+				'css path' => drupal_get_path('module', 'silky') . '/plugins',
+				'css file' => 'snippet.css',
+				'icon title' => 'tabs_wrapper',
+	      'icon path' => drupal_get_path('module', 'silky') . '/plugins/icons',
+	      'icon file' => 'accordion.png',
+				'buttons' => array('tabs_wrapper' => t('tabs_wrapper')),
+				'load' => TRUE,
+				'internal' => FALSE,
+				'settings' => array(),
+		  ),
+    
+      'tab_wrapper' => array(
+        'title' => t('Tab Wrapper'),
+				'path' => drupal_get_path('module', 'silky') . '/plugins',
+				'js file' => 'tab_wrapper.js',
+				'js path' => drupal_get_path('module', 'silky') . '/plugins',
+				'css path' => drupal_get_path('module', 'silky') . '/plugins',
+				'css file' => 'snippet.css',
+				'icon title' => 'tab_wrapper',
+	      'icon path' => drupal_get_path('module', 'silky') . '/plugins/icons',
+	      'icon file' => 'accordion.png',
+				'buttons' => array('tab_wrapper' => t('tab_wrapper')),
+				'load' => TRUE,
+				'internal' => FALSE,
+				'settings' => array(),
+		  ),
+    
+      'tab_header' => array(
+        'title' => t('Tab Header'),
+				'path' => drupal_get_path('module', 'silky') . '/plugins',
+				'js file' => 'tab_header.js',
+				'js path' => drupal_get_path('module', 'silky') . '/plugins',
+				'css path' => drupal_get_path('module', 'silky') . '/plugins',
+				'css file' => 'snippet.css',
+				'icon title' => 'tab_header',
+	      'icon path' => drupal_get_path('module', 'silky') . '/plugins/icons',
+	      'icon file' => 'accordion.png',
+				'buttons' => array('tab_header' => t('tab_header')),
+				'load' => TRUE,
+				'internal' => FALSE,
+				'settings' => array(),
+		  ),
+
+	);
+}

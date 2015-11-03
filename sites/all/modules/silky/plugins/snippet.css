@@ -1,0 +1,38 @@
+/* styles within the WYSIWYG */
+
+div.silk-accordion {
+  background-color: #ebebeb;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px dashed #630460;
+}
+
+div.silk-accordion header {
+  text-transform: uppercase;
+  color: #9eb436;
+  border-bottom: 1px solid #555;
+}
+
+div.silk-accordion div {
+  margin-top: 20px;
+  border: 1px solid #630460;
+}
+
+div.silk-tabs {
+  background-color: #ebebeb;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px dashed #f7a81f;
+}
+
+div.silk-tabs section{
+  border: 1px solid #555;
+  margin-bottom: 10px;
+}
+
+div.silk-tabs section header {
+  text-transform: uppercase;
+  color: #fff;
+  padding: 5px;
+  background-color: #9eb436;
+}

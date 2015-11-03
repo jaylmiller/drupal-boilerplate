@@ -1,0 +1,78 @@
+// ========================================
+// Silk Nav
+// ========================================
+
+.silk-nav {
+
+  > ul {
+
+    > li {
+
+      &:first-child {
+        max-height: none;
+        opacity: 0;
+        transition: opacity .25s;
+
+        @at-root .silk-nav > .silk-menu--active li:first-child {
+          opacity: 1;
+        }
+
+      }
+
+    }
+
+    li {
+      position: relative;
+      max-height: em(500);
+      opacity: 1;
+      transition:
+        max-height .25s,
+        opacity .25s;
+
+      @at-root .silk-menu--active > li:not(.silk-menu--active) {
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+      }
+
+    }
+
+      a {
+        display: block;
+      }
+
+      @at-root .silk-nav .silk-menu--active > a {
+        display: none;
+      }
+
+      @at-root .silk-menu--active > a.silk-menu--active {
+        display: block;
+      }
+
+      @at-root .trigger--advance {
+        display: block;
+      }
+
+      @at-root .silk-menu--active > .trigger--advance {
+        display: none;
+      }
+
+      ul {
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        transition:
+          max-height .25s,
+          opacity .25s;
+
+        @at-root .silk-nav .silk-menu--active > ul {
+          display: block;
+          max-height: em(500);
+          opacity: 1;
+        }
+
+      }
+
+  }
+
+}
