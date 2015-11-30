@@ -36,3 +36,36 @@ div.silk-tabs section header {
   padding: 5px;
   background-color: #9eb436;
 }
+
+div.silk-tabs section div{
+  padding: 5px;
+  border: 1px solid #555;
+  margin-bottom: 10px;
+}
+
+div.colf-half {
+  background-color: #ebebeb;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px dashed #630460;
+}
+
+div.colf-half:after {
+  clear: both;
+  content: '';
+  display: table;
+}
+
+div.colf-half .col-huge-6 {
+  float: left;
+  margin: 0 1% 2%;
+  width: 48%;
+}
+
+div.callout {
+  background-color: #ebebeb;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px dashed #630460;
+  border-top: 9px solid #FEC324;
+}

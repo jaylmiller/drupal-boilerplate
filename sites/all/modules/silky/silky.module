@@ -13,7 +13,8 @@ function silky_wysiwyg_include_directory($type)
   }
 }
 
-function flatten_array(array $array) {
+function flatten_array(array $array) 
+{
     $flattened_array = array();
     array_walk_recursive($array, function($a) use (&$flattened_array) { $flattened_array[] = $a; });
     return $flattened_array;
@@ -40,6 +41,7 @@ function default_buttons()
       'Table',
       'PasteFromWord',
       'Format',
+      'Styles',
     ),
     'custom' => array(
       'media',
