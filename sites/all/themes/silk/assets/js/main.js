@@ -1,6 +1,8 @@
 // Vendor
 //= include vendor/jquery-2.1.4.min.js
 //= include vendor/jquery.menuaim.js
+//= include vendor/tether.min.js
+//= include vendor/select.min.js
 
 // SILK Core
 //= include silk/silk.js
@@ -13,7 +15,6 @@
 //= include silk/nav.js
 //= include silk/table.js
 //= include silk/tabs.js
-//= include silk/video.js
 
 // Bootstrap
 (function($) {
@@ -25,6 +26,15 @@
   $('.silk-tabs').silktabs();
   $('.silk-accordion').silkaccordion();
   $('.silk-table').silktable();
+  
+  //Select
+  Drupal.behaviors.select = {
+  attach: function (context, settings) {
+    Select.init();
+    }
+  };
 
 
 }(jQuery));
+
+//= include site.js

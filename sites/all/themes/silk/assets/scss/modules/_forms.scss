@@ -29,3 +29,29 @@ select {}
 // ========================================
 
 .search {}
+
+// ========================================
+// Custom Select box
+// ========================================
+
+.select-select {
+  display: inline-block;
+  opacity: 1;
+  position: relative;
+  pointer-events: auto;
+  
+  @include media(medium) {
+    display: none;
+    pointer-events: none;
+    position: absolute;
+    opacity: 0;
+  }
+}
+
+.select-target.select-target.select-target {
+  display: none;
+  
+  @include media(medium) {
+    display: inline-block;
+  }
+}
