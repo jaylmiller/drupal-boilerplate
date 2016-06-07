@@ -30,7 +30,6 @@ dependencies[] = date_api
 dependencies[] = date_context
 dependencies[] = date_views
 
-
 ;contrib
 
 dependencies[] = views
@@ -67,7 +66,11 @@ dependencies[] = jquery_update
 dependencies[] = rules
 dependencies[] = features
 dependencies[] = file_entity
-dependencies[] = silky
+
+;custom
+
+dependencies[] = silk_help
+dependencies[] = silk_wysiwyg_tools
 
 
 files[] = idfive.profile

@@ -4,6 +4,8 @@
 
 @import 'helpers/normalize';
 
+@import 'overrides/overrides';
+
 @import 'helpers/clear';
 @import 'helpers/compartment';
 @import 'helpers/cover';

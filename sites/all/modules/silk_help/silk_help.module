@@ -1,0 +1,43 @@
+<?php
+
+/**
+ *
+ * @file
+ * [CLIENT] help menu
+ *
+ * This module adds helpful information for [CLIENT] about adding content and the silk theme.
+ *
+ */
+
+/**
+ * Implement hook_help()
+ */
+
+function silk_help_help($path, $arg) {
+    switch ($path) {
+        case "admin/help#silk_help":
+          $filepath = dirname(__FILE__) . '/tpl/silk-help-main.tpl.php';
+          $readme = file_get_contents($filepath);
+          $output = $readme;
+          return $output;
+        break;
+      }
+};
+
+function silk_help_menu() {
+  $items['admin/help/silk_help_page'] = array(
+    'title' => 'General Help for [CLIENT]',
+    'page callback' => '_silk_help_go_to_help',
+    'access callback' => TRUE,
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  return $items;
+}
+
+/**
+ * Page callback for silk_help_menu().
+ */
+function _silk_help_go_to_help() {
+  drupal_goto('admin/help/silk_help');
+}

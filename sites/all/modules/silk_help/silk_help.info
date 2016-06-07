@@ -1,0 +1,5 @@
+name = SILK Help
+description = This module adds helpful information for [CLIENT].
+package = silk
+core = 7.x
+files[] = silk_help.module

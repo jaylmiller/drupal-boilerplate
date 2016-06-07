@@ -1,0 +1,20 @@
+
+/* ========================================
+// Silk two column
+// ===================================== */
+
+@media screen and (min-width: 500px) {
+	.silk-two-column {
+	  -webkit-columns: 2; /* Chrome, Safari, Opera */
+	  -moz-columns: 2; /* Firefox */
+	  columns: 2;
+		-webkit-column-gap: 40px; /* Chrome, Safari, Opera */
+    -moz-column-gap: 40px; /* Firefox */
+    column-gap: 40px;
+	}
+}
+
+.silk-two-column p{
+	margin-top: 0px;
+	padding-top: 0px;
+}

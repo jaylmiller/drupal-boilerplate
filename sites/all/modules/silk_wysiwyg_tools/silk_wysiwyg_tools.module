@@ -1,0 +1,111 @@
+<?php
+
+/**
+ * SILK WYSIWYG Tools
+ *
+ * Works with wysiwyg module and ckeditor to allow the creation of custom html.
+ */
+
+
+ /**
+  * Implements hook_help().
+  *
+  * Adds the readme to the help section of drupal.
+  */
+  function silk_wysiwyg_tools_help($path, $arg) {
+   switch ($path) {
+     case 'admin/help#silk_wysiwyg_tools':
+
+       $filepath = dirname(__FILE__) . '/README.md';
+       if (file_exists($filepath)) {
+         $readme = file_get_contents($filepath);
+       }
+       else {
+         $filepath = dirname(__FILE__) . '/README.txt';
+         if (file_exists($filepath)) {
+           $readme = file_get_contents($filepath);
+         }
+       }
+       if (!isset($readme)) {
+         return NULL;
+       }
+       if (module_exists('markdown')) {
+         $filters = module_invoke('markdown', 'filter_info');
+         $info = $filters['filter_markdown'];
+
+         if (function_exists($info['process callback'])) {
+           $output = $info['process callback']($readme, NULL);
+         }
+         else {
+           $output = '<pre>' . $readme . '</pre>';
+         }
+       }
+       else {
+         $output = '<pre>' . $readme . '</pre>';
+       }
+
+       return $output;
+   }
+  }
+
+/**
+* implements hook_wysiwyg_plugin(), to define WYSIWYG plugins.
+*/
+function  silk_wysiwyg_tools_wysiwyg_plugin($editor, $version) {
+
+  switch ($editor) {
+   case 'ckeditor':
+    return array(
+     'silk_table' => array(
+      'path' => drupal_get_path('module', 'silk_wysiwyg_tools') . '/plugins',
+      'buttons' => array(
+       'silk_table_button' => t('SILK Table'),
+      ),
+      'load' => TRUE,
+     ),
+
+     'silk_accordion' => array(
+      'path' => drupal_get_path('module', 'silk_wysiwyg_tools') . '/plugins',
+      'buttons' => array(
+       'silk_accordion_button' => t('SILK Accordion'),
+      ),
+      'load' => TRUE,
+     ),
+
+     'silk_two_columns' => array(
+      'path' => drupal_get_path('module', 'silk_wysiwyg_tools') . '/plugins',
+      'buttons' => array(
+       'silk_two_columns_button' => t('SILK Two Columns'),
+      ),
+      'load' => TRUE,
+     ),
+
+     'silk_block_quote' => array(
+      'path' => drupal_get_path('module', 'silk_wysiwyg_tools') . '/plugins',
+      'buttons' => array(
+       'silk_block_quote_button' => t('SILK Block Quote'),
+      ),
+      'load' => TRUE,
+     ),
+
+     'silk_img_and_caption' => array(
+      'path' => drupal_get_path('module', 'silk_wysiwyg_tools') . '/plugins',
+      'buttons' => array(
+       'silk_img_and_caption_button' => t('SILK Image and Caption'),
+      ),
+      'load' => TRUE,
+     ),
+
+    );
+    break;
+  }
+ }
+
+
+/**
+ * implements hook_preprocess_node(), and adds plugin specific css/js to the rendered site
+ */
+function silk_wysiwyg_tools_preprocess_node(&$vars) {
+  // If needed, add css/js here.
+	//drupal_add_css(drupal_get_path('module', 'silk_wysiwyg_tools') . '/assets/css/silk_wysiwyg_tools.css');
+}

@@ -1,0 +1,63 @@
+/* ========================================
+// Simple css only help page tabs
+// ===================================== */
+
+.simple_silk_tabs {
+  position: relative;
+  min-height: 200px;
+  /* This part sucks */
+  clear: both;
+  margin: 55px 0 25px;
+  background: white;
+}
+.simple_silk_tabs .silk_tab {
+  float: left;
+}
+.simple_silk_tabs .silk_tab label {
+  background: #eee;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-left: -1px;
+  position: relative;
+  left: 1px;
+  top: -40px;
+  -webkit-transition: background-color .17s linear;
+}
+.simple_silk_tabs .silk_tab [type=radio] {
+  display: none;
+}
+.simple_silk_tabs .silk_tab_content {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  background: white;
+  right: 0;
+  bottom: 0;
+  padding: 20px;
+  border-top: 1px solid #ccc;
+  -webkit-transition: opacity .6s linear;
+  opacity: 0;
+}
+.simple_silk_tabs [type=radio]:checked ~ label {
+  background: white;
+  border-bottom: 1px solid white;
+  z-index: 2;
+}
+.simple_silk_tabs [type=radio]:checked ~ label ~ .silk_tab_content {
+  z-index: 1;
+  opacity: 1;
+}
+
+/* ========================================
+// Simple styles
+// ===================================== */
+
+.simple_silk_tabs section {
+  border-top: 1px solid #ccc;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.item-list {
+  display: none;
+}

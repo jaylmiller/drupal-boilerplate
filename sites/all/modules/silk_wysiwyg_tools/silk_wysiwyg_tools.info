@@ -1,0 +1,6 @@
+name =  SILK WYSIWYG Tools
+description = Special plugin for Wysiwyg module and CKEditor to allow inserting of accordions/etc.
+package = silk 
+core = 7.x
+version = "7.x-1.0"
+dependencies[] = wysiwyg
