@@ -2,108 +2,128 @@
 // Required plugins
 // ========================================
 
-// Plugin declarations
-var gulp = require('gulp');
-// https://www.npmjs.com/package/gulp-load-plugins
-var plugins = require('gulp-load-plugins')();
+var gulp = require('gulp'),
+    configuration = require('./configuration'),
+    changed = require('gulp-changed'),
+    postcss = require('gulp-postcss'),
+    sourcemaps = require('gulp-sourcemaps'),
+    cssdepth = require('gulp-cssdepth-check'),
+    cleanCss = require('gulp-clean-css'),
+    rename = require('gulp-rename'),
+    include = require('gulp-include'),
+    uglify = require('gulp-uglify'),
+    imagemin = require('gulp-imagemin'),
+    svgStore = require('gulp-svgstore'),
+    svgMin = require('gulp-svgmin');
 
 
 // ========================================
 // Set Paths
 // ========================================
 
-// Variable declarations
-// http://www.mikestreety.co.uk/blog/an-advanced-gulpjs-file
 var paths = {
-  scss: {
-    src:  '../assets/scss/**/*.scss',
+
+  postcss: {
+    src:  '../assets/postcss/**/*.css',
     dest: '../assets/css',
-  },
-  icons: {
-    src:  '../assets/icons/*.svg',
-    targetPath: '../scss/base/_icons.scss',
-    fontPath: '../fonts/',
-    dest:   '../assets/fonts/'
   },
   js: {
     compile: ['../assets/js/*.js'],
-    src:  ['../assets/js/*.js','assets/js/silk/*.js'],
+    src:  ['../assets/js/*.js', '../assets/js/silk/*.js'],
     dest: '../assets/js/build'
   },
-  templates: {
-    src:  '../assets/js/templates/**/*'
+  images: {
+    src: '../assets/images/*',
+    dest: '../assets/images/processed'
+  },
+  sprite: {
+    src:  '../assets/icons/*.svg'
   }
+
 };
 
 
 // ========================================
-// Icon Font
+// Compile Sass / Examine Output
 // ========================================
 
-// Sets the font name of your icon set
-var fontName = 'idfive';
+gulp.task('postcss', function() {
 
-// Creates an iconfont based on .svg(s) from assets/icons/
-gulp.task('iconfont', function() {
-  gulp.src(paths.icons.src)
-    // https://www.npmjs.com/package/gulp-iconfont-css
-    .pipe(plugins.iconfontCss({
-      fontName: fontName,
-      targetPath: paths.icons.targetPath,
-      fontPath: paths.icons.fontPath
-    }))
-    // https://www.npmjs.com/package/gulp-iconfont
-    .pipe(plugins.iconfont({
-      fontName: fontName,
-      // Adjusts output
-      normalize: true,
-      fontHeight: 1001,
-      appendCodepoints: true
-    }))
-    .pipe(gulp.dest(paths.icons.dest));
+  gulp.src('assets/postcss/styles.css')
+    .pipe(sourcemaps.init())
+    .pipe(postcss([
+      require('postcss-import'),
+      require('postcss-mixins')({
+        mixins: {
+          collage: function(mixin, xspan, yspan, xpoint, ypoint, xmax, ymax) {
+            return {
+              top: ypoint / ymax * 100 + '%',
+              left: xpoint / xmax * 100 + '%',
+              height: yspan / ymax * 100 + '%',
+              width: xspan / xmax * 100 + '%'
+            }
+          }
+        }
+      }),
+      require('postcss-nested'),
+      require('postcss-simple-grid')({
+        separator: '-'
+      }),
+      require('postcss-simple-vars')({
+        variables: configuration
+      }),
+      require('postcss-functions')({
+        functions: {
+          nu: function(value, additionalValue) {
+            var nuValue = value / additionalValue;
+            return nuValue;
+          },
+          em: function(value, context) {
+            if(context == null) {
+              context = configuration.bodySize;
+            }
+            var emValue = value / context;
+            return emValue + 'em';
+          },
+          rem: function(value) {
+            var emValue = value / 16;
+            return emValue + 'rem';
+          },
+        }
+      }),
+      require('autoprefixer')({
+        browsers: ['last 8 versions'],
+        cascade: false
+      })
+    ]))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest(paths.postcss.dest));
+
 });
 
+gulp.task('minify-css', function() {
 
-// ========================================
-// Compile Sass
-// ========================================
+  gulp.src('../assets/css/styles.css')
+    .pipe(cleanCss({
+      keepSpecialComments: 0,
+      restructuring: false
+    }))
+    .pipe(rename(function(path) {
+      path.basename += '.min';
+    }))
+    .pipe(gulp.dest(paths.postcss.dest))
 
-// Compile scss files within assets/scss/
-gulp.task('compile-sass', function() {
-  return gulp.src(paths.scss.src)
-    // https://www.npmjs.com/package/gulp-css-globbing
-    .pipe(plugins.cssGlobbing({
-      extensions: ['.scss']
-    }))
-    // https://www.npmjs.com/package/gulp-ruby-sass
-    .pipe(plugins.rubySass({
-      "sourcemap=none": true,
-      style: 'expanded',
-      precision: 8
-    }))
-    .on('error', function (err) {
-      console.error('Error!', err.message);
-    })
-    // https://www.npmjs.com/package/gulp-autoprefixer
-    .pipe(plugins.autoprefixer({
-      browsers: ['last 8 versions'],
-      cascade: false
-    }))
-    .pipe(gulp.dest(paths.scss.dest))
-    .pipe(plugins.livereload());
 });
 
+gulp.task('check-cssdepth', function() {
 
-// ========================================
-// Lint Js
-// ========================================
+  gulp.src('../assets/css/styles.css')
+    .pipe(cssdepth({
+      'depthAllowed': 3,
+      'showStats': true,
+      'showSelectors': true
+    }));
 
-// Finds and reports errors within assets/js/
-gulp.task('lint-js', function() {
-  return gulp.src(paths.js.src)
-    // https://www.npmjs.com/package/gulp-jshint
-    .pipe(plugins.jshint())
-    .pipe(plugins.jshint.reporter('default'));
 });
 
 
@@ -111,19 +131,51 @@ gulp.task('lint-js', function() {
 // Compile js
 // ========================================
 
-// Compiles js from assets/js/, aggregated silk js modules, concatenates js
-gulp.task('compile-js', function() {
+gulp.task('js', function() {
+
   return gulp.src(paths.js.compile)
-    // https://www.npmjs.com/package/gulp-include
-    .pipe(plugins.include())
-    // https://www.npmjs.com/package/gulp-plumber
-    .pipe(plugins.plumber())
-    .pipe(gulp.dest(paths.js.dest))
-    // https://www.npmjs.com/package/gulp-uglify
-    .pipe(plugins.uglify({
+    .pipe(include())
+    .pipe(uglify({
       mangle: false
     }))
     .pipe(gulp.dest(paths.js.dest));
+
+});
+
+
+// ========================================
+// SVG Sprite
+// ========================================
+
+gulp.task('images', function() {
+
+  return gulp.src(paths.images.src)
+    .pipe(imagemin({
+      optimizationLevel: 4,
+      progressive: true
+    }))
+    .pipe(gulp.dest(paths.images.dest));
+
+});
+
+
+// ========================================
+// SVG Sprite
+// ========================================
+
+gulp.task('sprite', function() {
+
+  return gulp.src(paths.sprite.src)
+    .pipe(svgMin())
+    .pipe(svgStore({
+      inlineSvg: true
+    }))
+    .pipe(rename({
+      prefix: 'sprite.',
+      basename: 'symbol'
+    }))
+    .pipe(gulp.dest('../assets/svg'));
+
 });
 
 
@@ -131,12 +183,11 @@ gulp.task('compile-js', function() {
 // Create Watch Task
 // ========================================
 
-// Defines all the tasks which run when 'gulp watch' is executed
-// This task is executed by default when 'gulp' is executed
 gulp.task('watch', function() {
-  plugins.livereload.listen();
-  gulp.watch(paths.scss.src, ['compile-sass']);
-  gulp.watch(paths.js.src, ['lint-js', 'compile-js']);
+
+  gulp.watch(paths.postcss.src, ['postcss', 'minify-css']);
+  gulp.watch(paths.js.src, ['js']);
+
 });
 
 
@@ -144,5 +195,9 @@ gulp.task('watch', function() {
 // Default 'gulp' task
 // ========================================
 
-// Defines all the tasks which run when 'gulp' is executed
-gulp.task('default', ['iconfont', 'compile-sass', 'lint-js', 'compile-js', 'watch']);
+gulp.task('default', [
+  'postcss',
+  'js',
+  'sprite',
+  'watch'
+]);

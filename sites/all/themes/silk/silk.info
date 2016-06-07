@@ -3,4 +3,4 @@ description = idfive default styling theme.
 core = 7.x
 
 ; Stylesheets
-stylesheets[all][] = 'assets/css/styles.css'
+stylesheets[all][] = 'assets/css/styles.min.css'

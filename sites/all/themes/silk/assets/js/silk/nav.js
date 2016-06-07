@@ -1,149 +1,66 @@
-// ========================================
-// Navigation
-// ========================================
+function silkNav() {
 
-(function($) {
+  var drawerTrigger = document.querySelector('.drawer__trigger');
+  drawerTrigger.addEventListener('click', triggerDrawer, false);
 
-  $.fn.silknav = function(options) {
+  function triggerDrawer() {
 
-    var itemId = 1,
-        active = 'silk-menu--active',
-        $history = [];
+    document.body.classList.toggle('visible-drawer');
 
-    $('.silk-nav li').each(function() {
+  }
 
-      $(this).attr('data-item-id', itemId);
-      itemId++;
+  var nav = document.querySelector('.silk-nav');
+  var revertTrigger = document.querySelector('.silk-nav__trigger--revert');
+  var reverseTrigger = document.querySelector('.silk-nav__trigger--reverse');
+  var nestedNavs = document.querySelectorAll('.silk-nav li ul');
+  var history = [];
 
-      if($(this).find('> ul').length) {
+  revertTrigger.addEventListener('click', startOver, false);
+  reverseTrigger.addEventListener('click', goBack, false);
 
-        $(this).find('> ul').before('<button class="trigger--advance"></button>');
+  for (var i = 0; i < nestedNavs.length; i++) {
+    var tierTitle = nestedNavs[i].previousSibling.previousSibling;
+    var tierTitleClone = document.createElement('a');
+    tierTitleClone.setAttribute('href', tierTitle.getAttribute('href'));
+    tierTitleClone.innerHTML = tierTitle.innerHTML;
+    nestedNavs[i].insertBefore(tierTitleClone, nestedNavs[i].firstChild);
 
-      }
+    var advanceTrigger = document.createElement('button');
+    advanceTrigger.setAttribute('aria-hidden', 'true');
+    advanceTrigger.classList.add('silk-nav__trigger', 'silk-nav__trigger--advance');
+    advanceTrigger.innerHTML = '<svg class="symbol symbol-chevron-right"><use xlink:href="#chevron-right"></use></svg>';
+    advanceTrigger.addEventListener('click', goForward, false);
 
-    });
+    nestedNavs[i].parentNode.insertBefore(advanceTrigger, nestedNavs[i]);
+  }
 
-    $('.trigger--revert').click(function() {
+  function startOver() {
 
-      $('.' + active).removeClass(active);
+    for (var i = 0; i < nestedNavs.length; i++) {
+      nestedNavs[i].classList.remove('silk-nav__nest--active')
+    }
 
-    });
+    history = [];
 
-    $('.trigger--reverse').click(function() {
+  }
 
-      var currentTree = $history.pop();
+  function goBack() {
 
-      $('[data-item-id='+ currentTree +']').parent().removeClass(active);
-      $('[data-item-id='+ currentTree +']').parent().prev().prev().addClass(active);
-      $('[data-item-id='+ currentTree +']').removeClass(active);
+    history[history.length - 1].nextSibling.classList.remove('silk-nav__nest--active');
+    history.pop();
 
-    });
+  }
 
-    $('.trigger--advance').click(function() {
+  function goForward() {
 
-      $(this).parent().parent().find('.' + active).removeClass(active);
-      $(this).parent().parent().parent().find('a.' + active).removeClass(active);
-      $(this).parent().parent().addClass(active);
-      $(this).parent().addClass(active);
-      $(this).prev().addClass(active);
+    if(!(nav.classList.contains('silk-nav--active'))) {
+      nav.classList.add('silk-nav--active');
+    }
 
-      $history.push($(this).parent().data('item-id'));
+    event.currentTarget.nextSibling.classList.add('silk-nav__nest--active');
 
-    });
+    history.push(event.currentTarget);
 
-  };
+  }
 
-  // $.fn.silknav = function(options) {
-
-  //   var settings = $.extend({
-  //     parentEl: 'a',
-  //     heightOffset: 1
-  //   }, options);
-
-  //   function shift($el, length, offset) {
-  //     // Calculate move value
-  //     var move = ((length - offset) * 100) * -1;
-
-  //     // Move
-  //     $el.find('> ul').css('left', move + '%');
-  //   }
-
-  //   function menuaimActivate(row) {
-  //     $row = $(row);
-
-  //     $row.addClass('hover');
-
-  //     if($row.hasClass('parent')) {
-  //       var $child = $row.find('> ul:first');
-  //       var $parent = $row.parent('ul');
-  //     }
-  //   }
-
-  //   function menuaimDeactivate(row) {
-  //     $(row).removeClass('hover');
-  //   }
-
-  //   function menuaimExitMenu(menu) {
-  //     return true;
-  //   }
-
-  //   return this.each(function() {
-
-  //     // Shortcut to nav element
-  //     var $nav = $(this);
-
-  //     // Add parent class to sub menus
-  //     $nav.find(settings.parentEl).each(function() {
-
-  //       // Get child element
-  //       var $child = $(this).next('ul');
-
-  //       // If we have a child...
-  //       if($child.length) {
-  //         // Add parent class
-  //         $(this).parent().addClass('parent');
-
-  //         // Create next link
-  //         $(this).append('<span class="next" />');
-
-  //         // Create back link
-  //         $child.prepend($('<li><a href="#" class="back">'+$(this).text()+'</a></li>'));
-  //       }
-
-  //     // Attach behaviour for clicking parent element
-  //     }).end().find('.parent > ' + settings.parentEl + ' > .next').click(function(e) {
-
-  //       // Stop href from firing
-  //       e.preventDefault();
-
-  //       // Get siblings so we can adjust z-index
-  //       $(this).parent().parent().find('> ul').removeClass('hidden').end().siblings().find('> ul').addClass('hidden');
-
-  //       // Shift nav
-  //       shift($nav, $(this).parents('li').length, 0);
-
-  //     // Attach behaviour for clicking back button
-  //     }).end().find('a.back').click(function(e) {
-
-  //       // Stop href from firing
-  //       e.preventDefault();
-
-  //       // Shift nav
-  //       shift($nav, $(this).parents('li').length, 2);
-
-  //     });
-
-  //     // If menuAim is available
-  //     if($.fn.menuAim) {
-  //       $nav.addClass('menuaim').find('ul').menuAim({
-  //         activate: menuaimActivate,
-  //         deactivate: menuaimDeactivate,
-  //         exitMenu: menuaimExitMenu
-  //       });
-  //     }
-
-  //   });
-
-  // };
-
-}(jQuery));
+}

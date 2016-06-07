@@ -1,0 +1,112 @@
+/* ========================================
+// Silk Nav
+// ===================================== */
+
+.silk-nav {
+
+  > ul {
+
+    > li {
+
+      > ul {
+        margin-top: em(27);
+
+        @mixin media $silkDrawerDisappears {
+          margin-top: 0;
+        }
+
+      }
+
+    }
+
+  }
+
+  ul {
+
+    ul {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      z-index: 200;
+      height: 100%;
+      width: 100%;
+      opacity: 0;
+      visibility: hidden;
+      transform: translate(0, 0);
+      transition:
+        opacity .4s,
+        visibility .4s,
+        transform .4s;
+
+      @mixin media $silkDrawerDisappears {
+        top: 100%;
+        left: 0;
+        display: none;
+        height: auto;
+        width: 200%;
+        opacity: 1;
+        visibility: visible;
+      }
+
+      &.silk-nav__nest--active {
+        opacity: 1;
+        visibility: visible;
+        transform: translate(-100%, 0);
+        transition:
+          opacity .4s,
+          visibility .4s,
+          transform .4s cubic-bezier(.175, .885, .24, 1.11);
+
+        @mixin media $silkDrawerDisappears {
+          transform: none;
+        }
+
+      }
+
+      > a {
+
+        @mixin media $silkDrawerDisappears {
+          display: none;
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+
+/* ========================================
+// Silk Nav Controls
+// ===================================== */
+
+.silk-nav__controls {
+  display: flex;
+  flex-wrap: wrap;
+
+  @mixin media $silkDrawerDisappears {
+    display: none;
+  }
+
+}
+
+  .silk-nav__trigger {
+
+    @mixin media $silkDrawerDisappears {
+      display: none;
+    }
+
+    &--revert,
+    &--reverse {
+      opacity: 0;
+      transition: opacity .2s;
+
+      .silk-nav--active & {
+        opacity: 1;
+      }
+
+    }
+
+  }
