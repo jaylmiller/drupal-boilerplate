@@ -63,6 +63,11 @@
   </head>
 
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
+  <!-- SVG Sprite -->
+  <div style="display: none;" class="sprite">
+    <?php require_once drupal_get_path('theme', 'silk') . '/assets/svg/sprite.symbol.svg'; ?>
+  </div>
+
   <div id="skip-link">
     <a href="#main-content" class="element-invisible element-focusable"><?php print t('Skip to main content'); ?></a>
   </div>

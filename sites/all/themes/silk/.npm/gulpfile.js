@@ -49,7 +49,7 @@ var paths = {
 
 gulp.task('postcss', function() {
 
-  gulp.src('assets/postcss/styles.css')
+  gulp.src('../assets/postcss/styles.css')
     .pipe(sourcemaps.init())
     .pipe(postcss([
       require('postcss-import'),
