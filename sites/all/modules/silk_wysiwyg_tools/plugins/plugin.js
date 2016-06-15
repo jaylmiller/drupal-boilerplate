@@ -12,7 +12,7 @@
    editor.ui.addButton( 'silk_table_button', {
     label: 'Add a SILK responsive table', //this is the tooltip text for the button
     command: 'silk_table_command',
-	  icon: this.path + 'images/icon.gif'
+	  icon: this.path + 'images/table.png'
    });
 
    CKEDITOR.dialog.add( 'silk_table_dialog', this.path + 'dialogs/silk_table.js' );
@@ -32,7 +32,7 @@
    editor.ui.addButton( 'silk_accordion_button', {
     label: 'Add a SILK responsive accordion', //this is the tooltip text for the button
     command: 'silk_accordion_command',
-    icon: this.path + 'images/icon.gif'
+    icon: this.path + 'images/accordion.png'
    });
   }
  });
@@ -50,7 +50,7 @@
    editor.ui.addButton( 'silk_two_columns_button', {
     label: 'Add a SILK responsive two column layout', //this is the tooltip text for the button
     command: 'silk_two_columns_command',
-    icon: this.path + 'images/icon.gif'
+    icon: this.path + 'images/two_columns.png'
    });
   }
  });
@@ -68,7 +68,7 @@
    editor.ui.addButton( 'silk_block_quote_button', {
     label: 'Add a SILK block quote', //this is the tooltip text for the button
     command: 'silk_block_quote_command',
-    icon: this.path + 'images/icon.gif'
+    icon: this.path + 'images/quotes.png'
    });
   }
  });
@@ -86,7 +86,7 @@
    editor.ui.addButton( 'silk_img_and_caption_button', {
     label: 'Add a SILK image and caption', //this is the tooltip text for the button
     command: 'silk_img_and_caption_command',
-    icon: this.path + 'images/icon.gif'
+    icon: this.path + 'images/img.png'
    });
   }
  });
